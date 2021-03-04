@@ -1,13 +1,12 @@
 ﻿# JS_Komputershop
  
-Build with vanilla Javascript, Bootstrap & jQuery
+Build with vanilla Javascript, EcmaScript, css via Bootstrap
 
 Simple shop for laptops
 
  Install NPM
 
- Install Bootstrap & jQuery
-  npm i bootstrap
-  npm i jquery
+ Install Bootstrap
+  -npm i bootstrap
   
  Run npm start or use localhost from VSCode
