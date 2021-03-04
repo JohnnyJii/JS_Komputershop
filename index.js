@@ -135,6 +135,7 @@ function BankHandler(banker, app) {
         if (banker.balance >= laptopPrice) {
             banker.balance -= laptopPrice;
             app.lblBalance.innerText = banker.balance;
+            window.alert("You just bougth a laptop")
         } else {
             window.alert("You don't have enough money to buy")
 
@@ -170,6 +171,7 @@ function BankHandler(banker, app) {
             window.alert("Only one loan per laptop")
     }
 
+    // Pay the loan back function
     this.repay = function () {
 
         if (banker.workBalance > 0) {
@@ -196,7 +198,7 @@ function BankHandler(banker, app) {
     }
 }
 
-const laptopArray = [...MOCK_LAPTOPS]; // to copy values not reference
+const laptopArray = [...MOCK_LAPTOPS]; // to copy values
 
 const app = new App(laptopArray);
 app.init();
