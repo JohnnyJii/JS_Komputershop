@@ -1,5 +1,34 @@
 import { MOCK_LAPTOPS } from './laptops.mock.js'
 
+//Create array
+const laptopArray = [...MOCK_LAPTOPS]; // to copy values
+
+const app = new App(laptopArray);
+app.init();
+
+//Create banker
+const banker = new Banker('Joe Banker');
+
+//Create Handler
+const bankhandler = new BankHandler(banker, app);
+bankhandler.init();
+
+//Create EventListeners
+app.elLaptops.addEventListener("change", app.renderLaptopSpec.bind(app));
+
+app.getLoanBtn.addEventListener('click', bankhandler.getLoan.bind(bankhandler));
+
+app.workBtn.addEventListener('click', bankhandler.work.bind(bankhandler));
+
+app.workBtn.addEventListener('click', bankhandler.totalWork.bind(bankhandler));
+
+app.bankBtn.addEventListener('click', bankhandler.bank.bind(bankhandler));
+
+app.buyBtn.addEventListener('click', bankhandler.buy.bind(bankhandler));
+
+app.repayLoanbtn.addEventListener('click', bankhandler.repay.bind(bankhandler));
+
+
 
 function App(laptops) {
   
@@ -9,6 +38,7 @@ function App(laptops) {
     this.lbldesc;
     this.lblBalance;
     this.lblWorkBalance;
+    this.lblTotalWorkBalance;
     this.lblCurrency;
     this.imgLaptopImg;
     this.getLoanBtn;
@@ -16,11 +46,8 @@ function App(laptops) {
     this.bankBtn;
     this.buyBtn;
   
-
-
     this.laptops = laptops;
 
- 
     this.init = function () {
 
         this.lblBankerName = document.getElementById('banker-name-label');
@@ -31,6 +58,7 @@ function App(laptops) {
         this.repayLoanbtn = document.getElementById('repay-button');
         this.getLoanBtn = document.getElementById('get-loan-button');
         this.lblWorkBalance = document.getElementById('work-balance-label');
+        this.lblTotalWorkBalance = document.getElementById('work-balance-total-label')
         this.bankBtn = document.getElementById('bank-button');
         this.workBtn = document.getElementById('work-button');
         this.elLaptops = document.getElementById('laptops-dropdownlist');
@@ -41,11 +69,12 @@ function App(laptops) {
         this.lblLaptopPrice = document.getElementById('price-label');
         this.buyBtn = document.getElementById('buy-button');
 
+        // Call The DDL & renderLapTop
         this.renderDDL();
         this.renderLaptopSpec();
     }
 
-
+    // Pinding array with DDL to option bar
     this.renderDDL = function () {
         
         for (let i = 0; i < this.laptops.length; i++) {
@@ -57,6 +86,7 @@ function App(laptops) {
         }
     }
 
+    // Render specifics from array data 
     this.renderLaptopSpec = function () {
         let selectedItem = parseInt(this.elLaptops.value);
 
@@ -70,23 +100,27 @@ function App(laptops) {
     }
 }
 
-// Banker Joe
+// Make the banker part and give values
 function Banker(name) {
     this.name = name;
     this.balance = 0;
     this.loanValue = 0;
     this.workBalance = 0;
+    this.totalWorkBalance = 0;
     this.hasLoan = false;
     this.buyLaptop = false;
 }
 
-//Events for banking
+//Events for bankhandler
 function BankHandler(banker, app) {
 
+    // initialize bank bankhandler data & binded buttons
     this.init = function () {
         app.lblWorkBalance.innerText = banker.workBalance;
+        //app.lblTotalWorkBalance.innerText = banker.totalWorkBalance;
         app.lblBalance.innerText = banker.balance;
         app.lblBankerName.innerText = banker.name;
+        
     }
 // When press work, adds 100 to balance
     this.work = function () {
@@ -94,6 +128,12 @@ function BankHandler(banker, app) {
         app.lblWorkBalance.innerText = banker.workBalance;
 
     }
+/* when press work, adds 100 to total
+    this.totalWork = function () {
+        banker.totalWorkBalance += 100;
+        app.lblTotalWorkBalance.innerText = banker.totalWorkBalance;
+    }
+*/
 
 //Function that makes the payments for loan
     this.bank = function () {
@@ -104,6 +144,7 @@ function BankHandler(banker, app) {
                 const interestRate = banker.workBalance * 0.1;
                 banker.balance += (banker.workBalance - interestRate);
 
+                //Determine if loan payment is bigger than loan
                 if (interestRate >= banker.loanValue) {
                     let remaining = interestRate - banker.loanValue;
                     banker.loanValue == 0;
@@ -112,18 +153,17 @@ function BankHandler(banker, app) {
 
                     this.manipulateLoanElements("hidden");
 
+                    // if not then subtract from loan amount
                 } else
                     banker.loanValue -= interestRate;
 
                 app.lblLoan.innerText = banker.loanValue;
-
+                // add from work to bank & reset the work, add the new innerTExt to HTML
             } else
                 banker.balance += banker.workBalance;
-
-            banker.workBalance = 0;
-            app.lblWorkBalance.innerText = banker.workBalance;
-            app.lblBalance.innerText = banker.balance;
-
+                banker.workBalance = 0;
+                app.lblWorkBalance.innerText = banker.workBalance;
+                app.lblBalance.innerText = banker.balance;
         } else {
             window.alert("You don't have money to transfer")
         }
@@ -168,14 +208,15 @@ function BankHandler(banker, app) {
 
     // Pay the loan back function
     this.repay = function () {
-
+        // check the balance, if balance is greater than 0 in work, do deposit, if not => do alert
         if (banker.workBalance > 0) {
-
+            // if loan is bigger than work, subtract work from neede loan amount, if work bigger, substract only needed left over stays in work. 
             if (banker.loanValue > banker.workBalance) {
                 banker.loanValue -= banker.workBalance;
                 banker.workBalance = 0;
             } else {
                 banker.workBalance -= banker.loanValue;
+                banker.balance -= banker.workBalance;
                 banker.loanValue = 0;
                 banker.hasLoan = false;
                 this.manipulateLoanElements('hidden');
@@ -187,33 +228,17 @@ function BankHandler(banker, app) {
         } else
             window.alert("Your gotta work first to pay")
     }
+    //use function to to hide loan button, if loanAmount > 0 show button. Otherwise hidden
     this.manipulateLoanElements = function (visibilityValue) {
         app.loanElementsDiv.style.visibility = visibilityValue;
         app.payBtnDiv.style.visibility = visibilityValue;
     }
 }
 
-const laptopArray = [...MOCK_LAPTOPS]; // to copy values
 
-const app = new App(laptopArray);
-app.init();
 
-const banker = new Banker('Joe Banker');
 
-const bankhandler = new BankHandler(banker, app);
-bankhandler.init();
 
-app.elLaptops.addEventListener("change", app.renderLaptopSpec.bind(app));
-
-app.getLoanBtn.addEventListener('click', bankhandler.getLoan.bind(bankhandler));
-
-app.workBtn.addEventListener('click', bankhandler.work.bind(bankhandler));
-
-app.bankBtn.addEventListener('click', bankhandler.bank.bind(bankhandler));
-
-app.buyBtn.addEventListener('click', bankhandler.buy.bind(bankhandler));
-
-app.repayLoanbtn.addEventListener('click', bankhandler.repay.bind(bankhandler));
 
 
 
