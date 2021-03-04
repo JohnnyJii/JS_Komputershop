@@ -7,14 +7,15 @@ function App(laptops) {
     this.lblLaptopDesc;
     this.lblLaptopPrice;
     this.lbldesc;
+    this.lblBalance;
+    this.lblWorkBalance;
+    this.lblCurrency;
     this.imgLaptopImg;
     this.getLoanBtn;
     this.workBtn;
     this.bankBtn;
     this.buyBtn;
-    this.lblBalance;
-    this.lblWorkBalance;
-    this.lblCurrency;
+  
 
 
     this.laptops = laptops;
