@@ -6,7 +6,7 @@ Simple shop for laptops
 
  Install NPM
 
- Install Bootsarp & jQuery
+ Install Bootstrap & jQuery
   npm i bootstrap
   npm i jquery
   
