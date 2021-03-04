@@ -135,7 +135,7 @@ function BankHandler(banker, app) {
         if (banker.balance >= laptopPrice) {
             banker.balance -= laptopPrice;
             app.lblBalance.innerText = banker.balance;
-            window.alert("You just bougth a laptop")
+            window.alert("Thank you for the purchase")
         } else {
             window.alert("You don't have enough money to buy")
 
@@ -146,10 +146,8 @@ function BankHandler(banker, app) {
     this.getLoan = function () {
         if (!banker.loanValue) {
             if (banker.balance >= 0) {
-
                 const propmtValue = window.prompt("Enter loan value:", 0)
                 if (!isNaN(propmtValue)) {
-
                     banker.loanValue = parseInt(propmtValue);
                     if (banker.loanValue > 0) {
                         if (banker.loanValue <= (banker.balance * 2)) {
@@ -157,15 +155,12 @@ function BankHandler(banker, app) {
                             app.lblLoan.innerText = banker.loanValue;
                             banker.hasLoan = true;
                             this.manipulateLoanElements("visible");
-
                         } else
                             window.alert("Your loan cannot exceed: " + banker.balance * 2)
                     }
                 } else
                     window.alert("Please make sure your request contains only numbers")
-
             }
-
             app.lblBalance.innerText = banker.balance;
         } else
             window.alert("Only one loan per laptop")
