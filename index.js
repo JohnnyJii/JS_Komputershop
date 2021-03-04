@@ -35,6 +35,7 @@ function App(laptops) {
         this.workBtn = document.getElementById('work-button');
         this.elLaptops = document.getElementById('laptops-dropdownlist');
         this.lbldesc = document.getElementById('description-label');
+        this.lblFeatures = document.getElementById('description-label')
         this.imgLaptopImg = document.getElementById('laptop-img');
         this.lblLaptopDesc = document.getElementById('laptop-description-label');
         this.lblLaptopPrice = document.getElementById('price-label');
@@ -61,7 +62,7 @@ function App(laptops) {
 
         const laptop = this.laptops.find(item => item.id === selectedItem)
 
-        this.lbldesc.innerText = laptop.description;
+        this.lblFeatures.innerText = laptop.features;
         this.lblLaptopDesc.innerText = laptop.description;
         this.lblLaptopPrice.innerText = laptop.price;
         this.imgLaptopImg.src = laptop.imgLink;

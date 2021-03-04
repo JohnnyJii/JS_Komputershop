@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
 </head>
 
-<body>
+<body >
     <header>
-       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" style="height: 15%;">
+       <nav class="navbar navbar-expand-md navbar-light fixed-top bg-ligth" style="height: 15%;">
            <div class="collapse navbar-collapse">
                <ul class="navbar-nav mr-auto">
-                    <h1 style="color: aliceblue;">Welcome to Komputer Store</h1>  
+                    <h1 class="font-italic" style="color: black;">Welcome to Komputer Store</h1>  
                </ul>
           </div>
       </nav>
@@ -74,17 +74,17 @@
                     </div>
                     <div class="col">
                         <div class="row">
-                            <label style="font-size: large;" class="font-weight-bold">Laptops</label>
+                            <label style="font-size: large;" class="font-weight-bold">Selection</label>
                         </div>
                         <div class="row">
-                            <select name="Laptops" id="laptops-dropdownlist"></select> 
+                            <select name="Laptops" id="laptops-dropdownlist" ></select> 
                         </div>
-                        <div class="row-cols-3" style="padding-top: 4%;">
+                        <div class="row-cols-3" style="padding-top: 5%;">
                         <div class="row">
-                            <label style="font-size: small;">Description</label>
+                            <label style="font-size: medium bold;">Features</label>
                         </div>
                             <div class="row">
-                                <label id="description-label" style="font-size: x-small;"></label>
+                                <label id="description-label" style="font-size: small;"></label>
                             </div>
                         </div>
                     </div>
@@ -94,7 +94,7 @@
             <div class="container border rounded" style="padding: 2%;">
                 <div class="row">
                     <div class="col-3">
-                        <img id="laptop-img" style="width: 100px; height: 100px;" alt="Computer img" class="rounded">
+                        <img id="laptop-img" style="width: 150px; height: 150px;" alt="Computer img" class="rounded">
 
                     </div>
                     <div class="col-5">
@@ -120,7 +120,7 @@
     </section>
 
 
-    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    
     <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="index.js" defer type="module"></script>
 </body>
