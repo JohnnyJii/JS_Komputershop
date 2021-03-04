@@ -1,4 +1,6 @@
 ﻿# JS_Komputershop
+ 
+Build with vanilla Javascript, Bootstrap & jQuery
 
 Simple shop for laptops
 
