@@ -1,9 +1,8 @@
 import { MOCK_LAPTOPS } from './laptops.mock.js'
 
 //Create array
-const laptopArray = [...MOCK_LAPTOPS]; // to copy values to new array
+const laptopArray = [...MOCK_LAPTOPS]; // to copy values
 
-// and store them in app
 const app = new App(laptopArray);
 app.init();
 
@@ -19,10 +18,7 @@ app.elLaptops.addEventListener("change", app.renderLaptopSpec.bind(app));
 
 app.getLoanBtn.addEventListener('click', bankhandler.getLoan.bind(bankhandler));
 
-app.workBtn.addEventListener('click', 
-    bankhandler.work.bind(bankhandler),
-    //bankhandler.totalWork.bind(bankhandler)
-    );
+app.workBtn.addEventListener('click', bankhandler.work.bind(bankhandler));
 
 app.workBtn.addEventListener('click', bankhandler.totalWork.bind(bankhandler));
 
@@ -132,12 +128,12 @@ function BankHandler(banker, app) {
         app.lblWorkBalance.innerText = banker.workBalance;
 
     }
-/* when press work, adds 100 to total
+// when press work, adds 100 to total
     this.totalWork = function () {
+        app.lblTotalWorkBalance.innerText = banker.totalWorkBalance
         banker.totalWorkBalance += 100;
-        app.lblTotalWorkBalance.innerText = banker.totalWorkBalance;
+        app.lblTotalWorkBalance = banker.totalWorkBalance;
     }
-*/
 
 //Function that makes the payments for loan
     this.bank = function () {
