@@ -1,8 +1,9 @@
 import { MOCK_LAPTOPS } from './laptops.mock.js'
 
 //Create array
-const laptopArray = [...MOCK_LAPTOPS]; // to copy values
+const laptopArray = [...MOCK_LAPTOPS]; // to copy values to new array
 
+// and store them in app
 const app = new App(laptopArray);
 app.init();
 
@@ -18,7 +19,10 @@ app.elLaptops.addEventListener("change", app.renderLaptopSpec.bind(app));
 
 app.getLoanBtn.addEventListener('click', bankhandler.getLoan.bind(bankhandler));
 
-app.workBtn.addEventListener('click', bankhandler.work.bind(bankhandler));
+app.workBtn.addEventListener('click', 
+    bankhandler.work.bind(bankhandler),
+    //bankhandler.totalWork.bind(bankhandler)
+    );
 
 app.workBtn.addEventListener('click', bankhandler.totalWork.bind(bankhandler));
 
