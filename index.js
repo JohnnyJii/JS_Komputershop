@@ -58,7 +58,6 @@ function App(laptops) {
         this.repayLoanbtn = document.getElementById('repay-button');
         this.getLoanBtn = document.getElementById('get-loan-button');
         this.lblWorkBalance = document.getElementById('work-balance-label');
-        this.lblTotalWorkBalance = document.getElementById('work-balance-total-label')
         this.bankBtn = document.getElementById('bank-button');
         this.workBtn = document.getElementById('work-button');
         this.elLaptops = document.getElementById('laptops-dropdownlist');
@@ -117,7 +116,6 @@ function BankHandler(banker, app) {
     // initialize bank bankhandler data & binded buttons
     this.init = function () {
         app.lblWorkBalance.innerText = banker.workBalance;
-        //app.lblTotalWorkBalance.innerText = banker.totalWorkBalance;
         app.lblBalance.innerText = banker.balance;
         app.lblBankerName.innerText = banker.name;
         
@@ -126,13 +124,13 @@ function BankHandler(banker, app) {
     this.work = function () {
         banker.workBalance += 100;
         app.lblWorkBalance.innerText = banker.workBalance;
-
+        app.lblTotalWorkBalance = banker.totalWorkBalance;
     }
 // when press work, adds 100 to total
     this.totalWork = function () {
         app.lblTotalWorkBalance.innerText = banker.totalWorkBalance
         banker.totalWorkBalance += 100;
-        app.lblTotalWorkBalance = banker.totalWorkBalance;
+        
     }
 
 //Function that makes the payments for loan
