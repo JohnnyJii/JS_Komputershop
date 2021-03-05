@@ -6,7 +6,8 @@ Simple shop for laptops
 
  Install NPM
 
- Install Bootstrap
+ Install Bootstrap &jquery
   -npm i bootstrap
+  -npm i jquery
   
  Run npm start or use localhost from VSCode
